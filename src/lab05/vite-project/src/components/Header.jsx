@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Tabs } from 'antd';
-// import 'antd/dist/reset.css';
+import { SearchProvider } from '../context/SearchContext';
 
 import UserInputTab from './UserInputTab';
 import CounterHookTab from './CounterHookTab';
@@ -11,10 +11,8 @@ import SearchDebounceTab from './SearchDebounceTab';
 const { TabPane } = Tabs;
 
 const Header = () => {
-  // Quản lý tab đang active bằng state
   const [activeKey, setActiveKey] = useState('1');
 
-  // Xử lý khi người dùng chuyển tab
   const onTabChange = (key) => {
     setActiveKey(key);
   };
@@ -34,7 +32,9 @@ const Header = () => {
         <SumCalculationTab />
       </TabPane>
       <TabPane tab='SearchDebounce' key='1'>
-        <SearchDebounceTab />
+        <SearchProvider>
+          <SearchDebounceTab />
+        </SearchProvider>
       </TabPane>
     </Tabs>
   );
